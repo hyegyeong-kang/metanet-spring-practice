@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
-	<context:component-scan base-package="kosa"/>
+	<context:component-scan base-package="kosa"/>   <!--이 패키지에 있는 어노태아션 있는 애들 객체 생성해주겠다.   -->
 	
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>   <!-- 없다고 무조건 404 에러 내는게 아니라 자체적으로 실행시킬 수 있으면 해달라 = -->
@@ -16,5 +16,24 @@
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/view/"/>
 		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- MyBatis Setting -->
+	
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource"/>
+		<property name="configLocation" value="/WEB-INF/mybatis-config.xml"/>
+	</bean>
+	
+	<bean id="myDataSource" 
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/oracle"/>
+		<property name="resourceRef" value="true"/>
 	</bean>
 </beans>

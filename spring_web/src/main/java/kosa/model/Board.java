@@ -1,12 +1,14 @@
 package kosa.model;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 // JSR 303
-public class Board {
+public class Board implements Serializable {
 	private int seq;
 	
 	@NotEmpty(message = "반드시 입력하세요")
