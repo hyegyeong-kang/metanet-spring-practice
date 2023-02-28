@@ -10,22 +10,22 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="org.zerock.sample"/>
 	
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> <!--  객체화 -->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"/>  <!--  오라클 서버 주소 , 계정 -->
 		<property name="username" value="kosa01"/>
 		<property name="password" value="1234"/>
 	</bean>
 	
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close"> <!-- 데이터소스 가지고 있으면:내가 연결하고자하는 오라클 서버와 잘 연결되어있다. -->
 		<constructor-arg ref="hikariConfig"/>
 	</bean>
 	
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
+		<property name="dataSource" ref="dataSource"/> <!-- dataSource : 얘가 데이터소스 객체 요구  -->
 	</bean>
 	
-	<mybatis-spring:scan base-package="org.zerock.mapper"/>
+	<mybatis-spring:scan base-package="org.zerock.mapper"/>  <!-- 여기 있는거 다 mapper 라고 알려주는 것 -->
 	
 	
 </beans>
