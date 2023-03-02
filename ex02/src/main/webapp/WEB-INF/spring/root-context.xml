@@ -31,6 +31,8 @@
 
 	<mybatis-spring:scan
 		base-package="org.zerock.mapper" />
+		
+	<context:component-scan base-package="org.zerock.service"/>
 
 
 </beans>
