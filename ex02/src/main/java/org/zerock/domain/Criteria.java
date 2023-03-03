@@ -25,7 +25,7 @@ public class Criteria {
     this.amount = amount;
   }
   
-  public String[] getTypeArr() {
+  public String[] getTypeArr() { // type 나누는 것
     
     return type == null? new String[] {}: type.split("");
   }
