@@ -78,7 +78,7 @@ public class BoardMapperTests {
 	public void testPaging() {
 		Criteria cri = new Criteria();
 		
-		List<BoardVO> list = mapper.getrListWithPaging(cri);
+		List<BoardVO> list = mapper.getListWithPaging(cri);
 		
 		list.forEach(board -> log.info(board));
 	}
