@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">Board Read</h1>
+    <h1 class="page-header">Board Register</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -42,18 +42,9 @@
             value='<c:out value="${board.writer }"/>' readonly="readonly">
         </div>
 
-<%-- 		<button data-oper='modify' class="btn btn-default">
-        <a href="/board/modify?bno=<c:out value="${board.bno}"/>">Modify</a></button>
-        <button data-oper='list' class="btn btn-info">
-        <a href="/board/list">List</a></button> --%>
-
-
 <button data-oper='modify' class="btn btn-default">Modify</button>
 <button data-oper='list' class="btn btn-info">List</button>
 
-<%-- <form id='operForm' action="/boad/modify" method="get">
-  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
-</form> --%>
 
 
 <form id='operForm' action="/boad/modify" method="get">
@@ -65,39 +56,123 @@
  
 </form>
 
-
-
       </div>
-      <!--  end panel-body -->
-
     </div>
-    <!--  end panel-body -->
   </div>
-  <!-- end panel -->
 </div>
-<!-- /.row -->
 
-<script type="text/javascript">
-$(document).ready(function() {
-  
-  var operForm = $("#operForm"); 
-  
-  $("button[data-oper='modify']").on("click", function(e){
-    
-    operForm.attr("action","/board/modify").submit();
-    
-  });
-  
-    
-  $("button[data-oper='list']").on("click", function(e){
-    
-    operForm.find("#bno").remove();
-    operForm.attr("action","/board/list")
-    operForm.submit();
-    
-  });  
-});
+<div class='row'>
+
+  <div class="col-lg-12">
+
+    <div class="panel panel-default">
+
+      
+      <div class="panel-heading">
+        <i class="fa fa-comments fa-fw"></i> Reply
+        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
+      </div>      
+      
+      
+      <!-- /.panel-heading -->
+      <div class="panel-body">        
+      
+        <ul class="chat">
+
+        </ul>
+        <!-- ./ end ul -->
+      </div>
+      <!-- /.panel .chat-panel -->
+
+	<div class="panel-footer"></div>
+
+
+		</div>
+  </div>
+  <!-- ./ end row -->
+</div>
+
+
+
+<!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Reply</label> 
+                <input class="form-control" name='reply' value='New Reply!!!!'>
+              </div>      
+              <div class="form-group">
+                <label>Replyer</label> 
+                <input class="form-control" name='replyer' value='replyer'>
+              </div>
+              <div class="form-group">
+                <label>Reply Date</label> 
+                <input class="form-control" name='replyDate' value='2018-01-01 13:13'>
+              </div>
+      
+            </div>
+<div class="modal-footer">
+        <button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
+        <button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
+        <button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
+        <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+      </div>          </div>
+        </div>
+      </div>
+
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+<script>
+	$(function(){
+		
+		var bnoVal = '<c:out value="${board.bno }"/>';
+		/* replyService.add(
+			{bno:bnoVal, reply:"JS Test", replyer:"tester"},
+			function(result){
+				alert("result: " + result);
+			}
+		) */
+		
+		/* replySerive.getList({bno:bnoVal, page:1}, function(list){
+			for(var i = 0, len = list.length || 0; i <len; i++){
+				console.log(list[i]);
+			}
+		}) */
+		
+		
+		/* replyService.remove(3, function(data){
+			if(data === 'success'){
+				alert('Remove');
+			}
+		}, function(){
+			alert('Error...');
+		});
+		 */
+		 
+		 
+		/* replyService.update({
+			rno : 4, 
+			bno : 8,
+			reply: "Modified Reply.."
+		}, function(result){
+			alert('수정완료');
+		}); */
+		 
+		 
+		 replyService.get(14, function(data){
+			 console.log(data);
+		 })
+
+	});
 </script>
-
 
 <%@include file="../includes/footer.jsp"%>
