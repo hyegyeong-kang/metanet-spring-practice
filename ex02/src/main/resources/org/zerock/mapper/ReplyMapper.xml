@@ -22,7 +22,7 @@
   	where rno = #{rno}
   </update>
   
-  <select id="getListWithPadding" resultType="org.zerock.domain.ReplyVO"">
+  <select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
   	select rno, bno, reply, replyer, replyDate, updatedate
   	from tbl_reply
   	where bno = #{bno}
