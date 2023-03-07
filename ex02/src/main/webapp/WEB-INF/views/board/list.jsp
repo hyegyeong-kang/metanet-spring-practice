@@ -179,6 +179,12 @@
 
 
 <script type="text/javascript">
+
+$(window).on('pageshow', function(){
+	var actionForm = $("#actionForm");
+	actionForm.find('input[name="bno"]').remove();
+});
+
 	$(document)
 			.ready(
 					function() {
